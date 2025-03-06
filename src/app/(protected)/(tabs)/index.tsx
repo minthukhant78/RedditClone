@@ -1,23 +1,36 @@
 import { View, FlatList, ActivityIndicator, Text } from "react-native";
 import PostListItem from "../../../components/PostListItem ";
-import posts from "../../../../assets/data/posts.json";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supbase";
+import { Tables } from "../../../types/database.types";
+
+type Post = Tables<"posts"> & {
+  user: Tables<"users">;
+  group: Tables<"groups">;
+  };
 export default function HomeScreen() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
     fetchPosts();
   }, []);
 
   const fetchPosts = async () => {
-    const {data, error} = await supabase.from("posts").select("*, group:groups(*), user:users!posts_user_id_fkey(*)");
-    setPosts(data);
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*, group:groups(*), user:users!posts_user_id_fkey(*)");
+    if (error) {
+      console.log(error);
+    } else {
+      setPosts(data);
+    }
   };
+
+
   return (
     <View>
-    <FlatList
+      <FlatList
         data={posts}
-        renderItem={({ item }) => <PostListItem post={item} />}   
+        renderItem={({ item }) => <PostListItem post={item} />}
       />
     </View>
   );

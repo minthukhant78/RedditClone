@@ -12,7 +12,7 @@ export default function TabLayout() {
           <Feather
             name="log-out"
             size={22}
-            color="black"
+            color="#FF5252"
             style={{ paddingRight: 10 }}
             onPress={() => signOut()}
           />
@@ -22,8 +22,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          headerTitle: 'Reddit',
-          headerTintColor: "#FF5700",
+          headerTitle: 'MinKing Esports',
+          headerTintColor: '#7ABAF2',
           tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color} />,
         }}
       />

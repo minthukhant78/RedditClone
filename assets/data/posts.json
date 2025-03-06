@@ -1,12 +1,12 @@
 [
   {
     "id": "post-1",
-    "title": "Why React Native is the best?",
+    "title": "Man City wins the Premier League",
     "created_at": "2025-02-12T08:30:00Z",
     "upvotes": 120,
     "nr_of_comments": 15,
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/3.jpg",
+    "description": "Go behind-the-scenes of another action-packed week for Manchester City with the latest episode of Inside City.",
+    "image": "https://www.mancity.com/meta/media/n4yh0xlg/250304_wide_ic_494_a-lowres.jpg?width=950&height=536&mode=crop",
     "group": {
       "id": "group-1",
       "name": "r/FrontendDevelopers",

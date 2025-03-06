@@ -13,12 +13,12 @@ export default function AppLayout() {
   return (
     <Stack>
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-      <Stack.Screen name='groupSelector' options={{headerShown: false}}/>
+      <Stack.Screen name='GroupSelector' options={{headerShown: false}}/>
       <Stack.Screen
         name='post/[id]'
         options={{
           headerTitle: '',
-          headerStyle: { backgroundColor: '#FF5700' },
+          headerStyle: { backgroundColor: '#00305A' },
           headerLeft: () => <AntDesign name="close" size={24} color="white" onPress={() => router.back()} />,
           headerRight: () =>
             <View style={{ flexDirection: 'row', gap: 10 }}>
@@ -26,7 +26,7 @@ export default function AppLayout() {
               <MaterialIcons name="sort" size={27} color="white" />
               <Entypo name="dots-three-horizontal" size={24} color="white" />
             </View>,
-          animation: "slide_from_bottom"
+          animation: "slide_from_right",
         }} />
     </Stack>
   )

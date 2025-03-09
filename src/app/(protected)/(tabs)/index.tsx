@@ -1,29 +1,26 @@
 import { View, FlatList, ActivityIndicator, Text } from "react-native";
 import PostListItem from "../../../components/PostListItem ";
-import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supbase";
-import { Tables } from "../../../types/database.types";
 import { useQuery } from "@tanstack/react-query";
 
-type Post = Tables<"posts"> & {
-  user: Tables<"users">;
-  group: Tables<"groups">;
-  };
 
 
-  const fetchPosts = async () => {
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*, group:groups(*), user:users!posts_user_id_fkey(*)");
-    if (error) {
-      throw error;
-    } else {
-      return data;
-    }
-  };
+const fetchPosts = async () => {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*, group:groups(*), user:users!posts_user_id_fkey(*)");
+  if (error) {
+    throw error;
+  } else {
+    return data;
+  }
+};
 export default function HomeScreen() {
-
-  const { data : posts, isLoading,error} = useQuery({
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["posts"],
     queryFn: () => fetchPosts(),
   });
@@ -32,11 +29,8 @@ export default function HomeScreen() {
     return <ActivityIndicator />;
   }
   if (error) {
-    return <Text>{error.message}</Text>;
+    return <Text>Something went wrong</Text>;
   }
-
-  
-
 
   return (
     <View>

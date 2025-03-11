@@ -1,20 +1,9 @@
 import { View, FlatList, ActivityIndicator, Text } from "react-native";
 import PostListItem from "../../../components/PostListItem ";
-import { supabase } from "../../../lib/supbase";
 import { useQuery } from "@tanstack/react-query";
+import { fetchPosts } from "../../../services/postServices";
 
 
-
-const fetchPosts = async () => {
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*, group:groups(*), user:users!posts_user_id_fkey(*)");
-  if (error) {
-    throw error;
-  } else {
-    return data;
-  }
-};
 export default function HomeScreen() {
   const {
     data: posts,
@@ -23,6 +12,7 @@ export default function HomeScreen() {
   } = useQuery({
     queryKey: ["posts"],
     queryFn: () => fetchPosts(),
+    staleTime: 10_000,
   });
 
   if (isLoading) {

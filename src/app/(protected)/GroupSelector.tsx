@@ -15,10 +15,12 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link, router } from "expo-router";
 import { useSetAtom } from "jotai";
 import { selectedGroupAtom } from "../../atoms";
-import { Group } from "../../types";
+// import { Group } from "../../types";
 import { useQuery } from "@tanstack/react-query";
 import { fetchGroups } from "../../services/groupServices";
+import { Tables } from "../../types/database.types";
 
+type Group = Tables<"groups">;
 export default function GroupSelector() {
   const [searchText, setSearchText] = useState<string>("");
   const setGroup = useSetAtom(selectedGroupAtom);

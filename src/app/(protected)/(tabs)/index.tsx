@@ -2,9 +2,9 @@ import { View, FlatList, ActivityIndicator, Text } from "react-native";
 import PostListItem from "../../../components/PostListItem ";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPosts } from "../../../services/postServices";
-
-
+import { useSupabase } from "../../../lib/supbase";
 export default function HomeScreen() {
+  const supabase = useSupabase();
   const {
     data: posts,
     isLoading,
@@ -13,7 +13,7 @@ export default function HomeScreen() {
     isRefetching,
   } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => fetchPosts(),
+    queryFn: () => fetchPosts(supabase),
     staleTime: 10_000,
   });
 

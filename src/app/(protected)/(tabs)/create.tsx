@@ -18,12 +18,13 @@ import * as ImagePicker from "expo-image-picker";
 import { useAtom } from "jotai";
 import { selectedGroupAtom } from "../../../atoms";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "../../../lib/supbase";
-import { TablesInsert } from "../../../types/database.types";
+import { useSupabase } from "../../../lib/supbase";
+import { Database, TablesInsert } from "../../../types/database.types";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 type InsertPost = TablesInsert<"posts">;
 
-const insertPost = async (post: InsertPost) => {
+const insertPost = async (post: InsertPost, supabase: SupabaseClient<Database>) => {
   // use supabase to post
   const { data, error } = await supabase
     .from("posts")
@@ -42,7 +43,7 @@ export default function CreateScreen() {
   const [bodyText, setBodyText] = useState<string>("");
   const [image, setImage] = useState<string | null>(null);
   const [group, setGroup] = useAtom(selectedGroupAtom);
-
+  const supabase = useSupabase();
 
 
   const queryClient = useQueryClient();
@@ -60,8 +61,9 @@ export default function CreateScreen() {
         title,
         description: bodyText,
         group_id: group.id,
-        user_id: "4717cb6d-5780-4638-9416-b365f66b7c3e",
-      }); 
+        // user_id: "4717cb6d-5780-4638-9416-b365f66b7c3e",
+      },
+      supabase); 
     },
       
     onSuccess: (data) => {
